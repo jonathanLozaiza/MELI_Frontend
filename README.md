@@ -1,5 +1,14 @@
 # meli_frontend
 
+## Install Vue CLI
+```
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+
+version: @vue/cli 5.0.8
+```
+
 ## Project setup
 ```
 npm install
