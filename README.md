@@ -3,10 +3,10 @@
 ## Install Vue CLI
 ```
 npm install -g @vue/cli
-# OR
-yarn global add @vue/cli
 
-version: @vue/cli 5.0.8
+versions: 
+  @vue/cli 5.0.8
+  node v16.13.0
 ```
 
 ## Project setup
