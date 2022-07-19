@@ -1,16 +1,15 @@
 <template>
   <v-container class="my-0 py-0">
-    <v-row class="tags">
-      <v-breadcrumbs :items="tags" class="py-0 mt-0 px-0">
-        <template v-slot:divider>
-          <v-icon>mdi-chevron-right</v-icon>
-        </template>
-      </v-breadcrumbs>
-    </v-row>
-    <v-row v-if="getItems" no-gutters class="items">
-      <v-col cols="12" v-for="(item, index) of getItems.items" :key="index">
-        <Item :item="item" />
+    <v-row no-gutters>
+      <v-spacer />
+      <v-col cols="10">
+        <v-row v-if="getItems" no-gutters class="items">
+          <v-col cols="12" v-for="(item, index) of getItems.items" :key="index">
+            <Item :item="item" />
+          </v-col>
+        </v-row>
       </v-col>
+      <v-spacer />
     </v-row>
   </v-container>
 </template>
@@ -48,16 +47,19 @@ export default {
   },
   methods: {
     ...mapActions(["getItemsAction"]),
-  },
-  async mounted() {
-    try {
-      this.loading = true;
-      this.errorMsg = "";
+    async loadItems() {
       const query = this.$router.currentRoute.query.q;
       if (query === "") {
         return null;
       }
       await this.getItemsAction(query);
+    },
+  },
+  async mounted() {
+    try {
+      this.loading = true;
+      this.errorMsg = "";
+      await this.loadItems();
     } catch (error) {
       this.errorMsg = error.message;
     } finally {
@@ -69,7 +71,6 @@ export default {
 
 <style lang="sass">
 .container
-  margin: 0 auto
 .tags
   padding: 0px
   margin-top: 16px
@@ -78,5 +79,6 @@ export default {
   margin-right: 0px
 .items
   background-color: #FFFFFF
+  margin-top: 46px !important
   margin-bottom: 32px !important
 </style>

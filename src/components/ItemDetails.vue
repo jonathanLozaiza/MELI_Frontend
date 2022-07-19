@@ -1,56 +1,66 @@
 <template>
   <v-container class="my-0 py-0">
-    <v-row class="tags">
-      <v-breadcrumbs :items="tags" class="py-0 mt-0 px-0">
-        <template v-slot:divider>
-          <v-icon>mdi-chevron-right</v-icon>
-        </template>
-      </v-breadcrumbs>
-    </v-row>
-    <v-row no-gutters class="item_details">
-      <v-col cols="12" lg="9" md="9">
-        <v-row no-gutters>
-          <v-avatar class="avatar" tile>
-            <v-img
-              v-if="item.picture"
-              :src="item.picture"
-              width="680px"
-              style="object-fit: contain !important"
-            />
-          </v-avatar>
+    <v-row no-gutters>
+      <v-spacer />
+      <v-col cols="10">
+        <v-row class="tags">
+          <v-breadcrumbs :items="tags" class="py-0 mt-0 px-0">
+            <template v-slot:divider>
+              <v-icon>mdi-chevron-right</v-icon>
+            </template>
+          </v-breadcrumbs>
         </v-row>
-        <v-row no-gutters class="item_description">
-          <p class="item_description_title">Descripción del producto</p>
-          <p class="item_description_text">
-            {{ item.description }}
-          </p>
+        <v-row no-gutters class="item_details">
+          <v-col cols="12" lg="9" md="9">
+            <v-row no-gutters>
+              <v-avatar class="avatar" tile width="680px">
+                <v-img
+                  v-if="item.picture"
+                  :src="item.picture"
+                  width="680px"
+                  style="object-fit: contain !important"
+                />
+              </v-avatar>
+            </v-row>
+            <v-row no-gutters class="item_description">
+              <p class="item_description_title">Descripción del producto</p>
+              <p class="item_description_text">
+                {{ item.description }}
+              </p>
+            </v-row>
+          </v-col>
+          <v-col
+            cols="12"
+            lg="3"
+            md="3"
+            :class="{ margin_responsive: $vuetify.breakpoint.smAndDown }"
+          >
+            <p class="item_quantity">
+              {{ item.condition }} - {{ item.sold_quantity }} vendidos
+            </p>
+            <p class="item_name">{{ item.title }}</p>
+            <div class="d-flex">
+              <p class="price">
+                $
+                {{
+                  new Intl.NumberFormat("de-DE", {
+                    maximumFractionDigits: 2,
+                  }).format(item.price.amount)
+                }}
+              </p>
+              <p class="price_decimals">00</p>
+            </div>
+            <v-btn
+              color="color_type_4"
+              class="text-white sell_button text-capitalize"
+              height="50px"
+            >
+              Comprar
+            </v-btn>
+          </v-col>
         </v-row>
       </v-col>
-      <v-col
-        cols="12"
-        lg="3"
-        md="3"
-        :class="{ margin_responsive: $vuetify.breakpoint.smAndDown }"
-      >
-        <p class="item_quantity">
-          {{ item.condition }} - {{ item.sold_quantity }} vendidos
-        </p>
-        <p class="item_name">{{ item.title }}</p>
-        <div class="d-flex">
-          <p class="price">
-            $
-            {{
-              new Intl.NumberFormat("de-DE", {
-                maximumFractionDigits: 2,
-              }).format(item.price.amount)
-            }}
-          </p>
-          <p class="price_decimals">00</p>
-        </div>
-        <v-btn color="color_type_4" class="text-white sell_button">
-          Comprar
-        </v-btn>
-      </v-col>
+      <v-spacer />
     </v-row>
   </v-container>
 </template>
@@ -127,7 +137,8 @@ export default {
   margin-top: 10px
   font-size: 20px
 .sell_button
-  margin-rigth: 32px
-  color: #ffffff
   width: 91%
+  margin-rigth: 32px
+  font-size: 20px
+  color: #ffffff
 </style>
