@@ -12,6 +12,7 @@
             v-model="search"
             :placeholder="`Nunca dejes de buscar *`"
             hide-details
+            @keyup.enter="searchItems"
           />
         </div>
         <div class="ml-n16">
@@ -41,12 +42,13 @@ export default {
 
   data: () => ({
     search: "",
+    loading: false,
+    errorMsg: "",
   }),
 
   methods: {
     ...mapActions(["getItemsAction"]),
     async searchItems() {
-      console.log("ahahahahahahahah");
       try {
         this.loading = true;
         this.errorMsg = "";
